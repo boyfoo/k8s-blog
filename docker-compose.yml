@@ -21,7 +21,7 @@ services:
   #      my-docker-network:
   #        ipv4_address: 172.22.22.20
   api01:
-    image: leleos/php-fpm:7.2
+    image: adhocore/phpfpm:8.0
     working_dir: /data
     volumes:
       - ./:/data
