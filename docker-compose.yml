@@ -1,0 +1,79 @@
+version: "3"
+
+services:
+  es01:
+    image: registry.cn-shanghai.aliyuncs.com/boyfoo/elasticsearch-ik:6.8.0
+    volumes:
+    - ./docker/es/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    - ./docker/es/config/jvm.options:/usr/share/elasticsearch/config/jvm.options
+    ports:
+    - 9200:9200
+    environment:
+      TZ: "Asia/Shanghai"
+      http.cors.enabled: "true"
+      http.cors.allow-origin: "*"
+      network.host: 0.0.0.0
+      discovery.type: "single-node"
+#    networks:
+#      my-docker-network:
+#        ipv4_address: 172.22.22.20
+
+
+  cerebro01:
+    image: lmenezes/cerebro
+    ports:
+    - 9000:9000
+#    networks:
+#      my-docker-network:
+#        ipv4_address: 172.22.22.21
+
+  kibana01:
+    image: kibana:6.8.0
+    depends_on:
+    - es01
+    ports:
+    - 5601:5601
+    environment:
+      I18N_LOCALE: zh-CN
+      ELASTICSEARCH_URL: http://es01:9200
+#    networks:
+#      my-docker-network:
+#        ipv4_address: 172.22.22.22
+
+  # filebeat01:
+  #   image: elastic/filebeat:6.8.0
+  #   volumes:
+  #     - ./volume/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
+  #     - /Users/zx/Desktop/docker-project/rxt/nginx01/logs/:/var/nginx/log/
+  #   networks:
+  #     my-docker-network:
+  #       ipv4_address: 172.22.22.23
+#  head01:
+#    image: mobz/elasticsearch-head:5
+#    depends_on:
+#    - es01
+#    ports:
+#    - 9100:9100
+#    networks:
+#      my-docker-network:
+#        ipv4_address: 172.22.22.23
+
+  # logstash01:
+  #   image: logstash:6.8.0
+  #   volumes:
+  #   - ./volume/logstash01/config:/usr/share/logstash/config
+  #   - ./volume/logstash01/pipeline/:/usr/share/logstash/pipeline/
+  #   ports:
+  #   - 5047:5047
+  #   - 9600:9600
+  #   - 12345:12345
+
+
+# 设置网络模块
+#networks:
+#  # 自定义网络
+#  my-docker-network:
+#    external:
+#      name: my-docker-network
+
+

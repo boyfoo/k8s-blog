@@ -1,0 +1,19 @@
+{
+  "index": "question",
+  "type": "_doc",
+  "body": {
+    "query": {
+      "bool": {
+        "must": [
+          {
+            "term": {
+              "content": {
+                "value": "你好"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

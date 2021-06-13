@@ -1,0 +1,17 @@
+{
+  "index": "question",
+  "type": "_doc",
+  "body": {
+    "query": {
+      "bool": {
+        "must": [
+          {
+            "match": {
+              "content": "名字"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

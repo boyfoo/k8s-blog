@@ -1,0 +1,23 @@
+question_content: 随意发现
+
+k8s_version: 1.20.1
+
+question_tag:
+  - pod
+  - 服务发现
+  - service
+
+
+question_answer: |
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: test-svc-006
+  spec:
+    clusterIP: None # 无头服务
+    ports:
+      - port: 8082 # 无头服务这个值好像并没有用
+        targetPort: 80
+    selector:
+      app: nginx-se05
+

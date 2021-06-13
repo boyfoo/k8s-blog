@@ -1,0 +1,7 @@
+
+GET http://localhost:8000/api/question?content=名字
+Accept: application/json
+
+###
+
+
